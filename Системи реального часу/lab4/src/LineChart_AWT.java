@@ -69,7 +69,7 @@ public class LineChart_AWT extends ApplicationFrame {
         LineChart_AWT chart = new LineChart_AWT(
                 "x Vs t" ,
                 "x vs t");
-        chart.pack( );
+        chart.pack();
         RefineryUtilities.centerFrameOnScreen( chart );
         chart.setVisible( true );
     }

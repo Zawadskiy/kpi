@@ -26,39 +26,44 @@ public class Main  extends JFrame {
 
     static void factor(double n){
 
-        if(n==2) result.add(2);
-        else {
 
+            if (n == 2) result.add(2);
+            else {
+                double x = Math.sqrt(n);
+                double y = 0;
+                int k = 0;
 
-        double x = Math.sqrt(n);
-        double y = 0;
-        int k = 0;
+                if (x % 1 != 0) {
+                    x = (int) ++x;
+                }
+                long time =System.nanoTime();
+                for (k = 1; (Math.sqrt((x + k - 1) * (x + k - 1) - n) % 1 != 0); k++) {
+                    System.out.println("K=" + k + " y= " + Math.sqrt((x + k) * (x + k) - n) + " x=" + x);
+                    if (k > n) break;
+                    if (System.nanoTime()-time>1000000000){
+                        successfully =false;
+                        break;
+                    }
+                }
 
-        if(x%1!=0) {
-            x = (int)++x;
-        }
+                if (k <= n) {
+                    int a = (int) (x + k - 1 + Math.sqrt((x + k - 1) * (x + k - 1) - n));
+                    int b = (int) (x + k - 1 - Math.sqrt((x + k - 1) * (x + k - 1) - n));
 
-        for ( k = 1;Math.sqrt((x+k-1)*(x+k-1)-n) % 1 != 0 ; k++){
-            System.out.println("K=" + k + " y= " + Math.sqrt((x+k)*(x+k)-n) +" x=" + x);
-            if(k>n) break;
-        }
+                    if (lst.contains(a)) {
+                        result.add(a);
+                    } else if (a != 1) {
+                        factor(a);
+                    }
+                    if (lst.contains(b)) {
+                        result.add(b);
+                    } else if (b != 1) {
+                        factor(b);
+                    }
+                } else successfully = false;
 
-        if(k<=n) {
-            int a = (int) (x + k - 1 + Math.sqrt((x + k - 1) * (x + k - 1) - n));
-            int b = (int) (x + k - 1 - Math.sqrt((x + k - 1) * (x + k - 1) - n));
-
-            if (lst.contains(a)) {
-                result.add(a);
-            } else if (a!=1){
-                factor(a);
             }
-            if (lst.contains(b)) {
-                result.add(b);
-            } else if(b!=1) {
-                factor(b);
-            }
-        } else successfully = false;
-        }
+
     }
 
     public static void generate() {
